@@ -84,15 +84,21 @@ Backend tests removed per request.
 
 ## Deployment
 
-**📖 Complete Free Deployment Guide**: See [DEPLOYMENT.md](./DEPLOYMENT.md) for step-by-step instructions.
+**Quick Deployment Guide:**
 
-Quick summary:
 - **Backend**: Deploy to Render (free tier) - see `render.yaml` for configuration
-- **Frontend**: Deploy to Netlify or Vercel (free tier) - see `frontend/netlify.toml` or `frontend/vercel.json`
-- **Cost**: $0/month (all free tiers)
-- **Setup Time**: ~15-20 minutes
+  - Root Directory: `backend`
+  - Build Command: `pip install -r requirements.txt`
+  - Start Command: `gunicorn --bind 0.0.0.0:$PORT wsgi:app`
+  - Add Environment Variable: `SECRET_KEY` (generate a strong random string)
 
-The deployment guide includes troubleshooting, environment variable setup, and production considerations.
+- **Frontend**: Deploy to Netlify or Vercel (free tier)
+  - Base Directory: `frontend`
+  - Build Command: `npm run build`
+  - Publish Directory: `frontend/dist`
+  - Add Environment Variable: `VITE_API_BASE_URL` = your Render backend URL
+
+- **Cost**: $0/month (all free tiers)
 
 ## Git Quickstart
 
