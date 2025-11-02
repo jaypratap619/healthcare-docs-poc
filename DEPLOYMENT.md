@@ -56,6 +56,10 @@ Replace `YOUR_USERNAME` and `YOUR_REPO_NAME` with your actual GitHub details.
 6. Wait for deployment (5-10 minutes)
 7. Copy your backend URL (e.g., `https://healthcare-docs-backend.onrender.com`)
 
+**Note**: If deployment fails with import errors, check the Render logs. The `wsgi.py` file automatically handles Python path configuration. If issues persist, you can manually set the service with:
+   - **Build Command**: `cd backend && pip install -r requirements.txt`
+   - **Start Command**: `cd backend && gunicorn --bind 0.0.0.0:$PORT wsgi:app`
+
 ### Important Notes for Render
 
 - **Free tier limitations**: 
