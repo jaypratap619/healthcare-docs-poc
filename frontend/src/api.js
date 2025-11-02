@@ -7,8 +7,11 @@ export function clearToken() {
 }
 const PATIENT_ID = 'patient-123';
 
+// Get API base URL from environment or use relative path (for same-origin)
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export async function listDocuments() {
-  const res = await fetch('/api/documents', {
+  const res = await fetch(`${API_BASE}/api/documents`, {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
       'X-Patient-Id': PATIENT_ID,
@@ -21,7 +24,7 @@ export async function listDocuments() {
 export async function uploadDocument(file) {
   const form = new FormData();
   form.append('file', file);
-  const res = await fetch('/api/documents/upload', {
+  const res = await fetch(`${API_BASE}/api/documents/upload`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${TOKEN}`,
@@ -45,11 +48,11 @@ export async function uploadDocument(file) {
 }
 
 export function downloadUrl(id) {
-  return `/api/documents/${id}/download`;
+  return `${API_BASE}/api/documents/${id}/download`;
 }
 
 export async function deleteDocument(id) {
-  const res = await fetch(`/api/documents/${id}`, {
+  const res = await fetch(`${API_BASE}/api/documents/${id}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${TOKEN}`,
@@ -61,7 +64,7 @@ export async function deleteDocument(id) {
 }
 
 export async function signup(email, password) {
-  const res = await fetch('/api/auth/signup', {
+  const res = await fetch(`${API_BASE}/api/auth/signup`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password })
@@ -71,7 +74,7 @@ export async function signup(email, password) {
 }
 
 export async function login(email, password) {
-  const res = await fetch('/api/auth/login', {
+  const res = await fetch(`${API_BASE}/api/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password })
@@ -81,7 +84,7 @@ export async function login(email, password) {
 }
 
 export async function downloadDocumentFile(id) {
-  const res = await fetch(`/api/documents/${id}/download`, {
+  const res = await fetch(`${API_BASE}/api/documents/${id}/download`, {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
       'X-Patient-Id': PATIENT_ID,

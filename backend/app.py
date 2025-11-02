@@ -1,6 +1,7 @@
 import os
 import uuid
 from flask import Flask, jsonify, request, send_file, abort, g
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from werkzeug.exceptions import RequestEntityTooLarge
 
@@ -18,6 +19,9 @@ ALLOWED_MIME_TYPES = {"application/pdf"}
 def create_app(config_object=Config):
     app = Flask(__name__)
     app.config.from_object(config_object)
+    
+    # Enable CORS for all routes (adjust origins for production)
+    CORS(app, resources={r"/api/*": {"origins": "*"}})
 
     # Ensure storage directory exists
     os.makedirs(app.config["STORAGE_DIR"], exist_ok=True)

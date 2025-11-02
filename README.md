@@ -84,23 +84,15 @@ Backend tests removed per request.
 
 ## Deployment
 
-Minimal, Docker-less deployment suggestion:
+**📖 Complete Free Deployment Guide**: See [DEPLOYMENT.md](./DEPLOYMENT.md) for step-by-step instructions.
 
-- Backend (Flask) on Render
-  1. Commit and push this repo to GitHub.
-  2. Create a new Web Service in Render, connect the repo, set Root Directory to `backend`.
-  3. Environment: Python 3.11; Build Command: `pip install -r requirements.txt`.
-  4. Start Command: `gunicorn backend.app:create_app()`.
-  5. Add Environment Variables:
-     - `SECRET_KEY` (generate a strong random string)
-     - Optionally `FLASK_ENV=production`
-  6. Create a persistent disk and mount to `/opt/render/project/src/backend/storage` if you need durable files.
+Quick summary:
+- **Backend**: Deploy to Render (free tier) - see `render.yaml` for configuration
+- **Frontend**: Deploy to Netlify or Vercel (free tier) - see `frontend/netlify.toml` or `frontend/vercel.json`
+- **Cost**: $0/month (all free tiers)
+- **Setup Time**: ~15-20 minutes
 
-- Frontend (Vite) on Netlify or Vercel
-  - Build Command: `npm run build`
-  - Publish Directory: `frontend/dist`
-  - Set `NODE_VERSION` to 18 or higher
-  - Configure API URL in frontend when deploying (set a `VITE_API_BASE` and use it in fetch calls or create a Netlify/Vercel rewrite proxy to your backend).
+The deployment guide includes troubleshooting, environment variable setup, and production considerations.
 
 ## Git Quickstart
 
